@@ -1,11 +1,17 @@
 
 import './App.css';
+import Start from '../src/Start';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="flex items-center justify-center bg-slate-300 h-screen">
-      hi
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/'>
+          <Route index element={<Start/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

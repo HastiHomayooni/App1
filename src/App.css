@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Inspiration';
+    src: url('./fonts/Inspiration-Regular.ttf') format('truetype');
+    /* Add other font variations (italic, bold, etc.) if available */
+}
+@font-face {
+    font-family: 'Imprima';
+    src: url('./fonts/Imprima-Regular.ttf') format('truetype');
+    /* Add other font variations (bold, italic, etc.) if available */
+}
