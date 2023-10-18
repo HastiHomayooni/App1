@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'myOrange': 'rgba(255, 127, 80, 0.8)',
+        'myOrange': 'rgba(255, 127, 80, 0.82)',
         'myDark': '#0C466C',
       },
       fontFamily: {
