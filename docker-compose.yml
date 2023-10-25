@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    image: app1-image
+    ports:
+      - 3001:3000
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=production
+    restart: always
