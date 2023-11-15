@@ -54,9 +54,9 @@ function Login(){
                         {password ==='' && confirm && (<div className='w-auto font-imprima text-left text-red-500 mx-2 md:px-6 px-3 text-xs'>You should fill the password.</div>)}
                         {password !=='' && !passwordV && confirm && (<div className='w-auto font-imprima text-left text-red-500 mx-2 md:px-6 px-3 text-xs'>Invalid Password</div>)}
                     </div>
-
-                    <Link className='w-auto' to={'/Profile'}>
-                        <div className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center text-lg font-imprima mt-8' onClick={() => setConfirm(true)}>Log in</div>
+                    
+                    <Link className='w-auto' to={(email !== '' && password !== '' && passwordV && emailV )? '/Profile' : ''}>
+                        <div className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center text-lg font-imprima mt-8 cursor-pointer' onClick={() => setConfirm(true)}>Log in</div>
                     </Link>
 
                     <div className='flex justify-between items-center mt-8 mx-4'>

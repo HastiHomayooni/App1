@@ -98,7 +98,7 @@ function SignUp(){
                             {password !=='' && !passwordV && confirm && (<div className='w-auto font-imprima text-left text-red-500 mx-2 md:px-6 px-3 text-xs'>Invalid Password</div>)}
                         </div>
                     </div>
-                    <Link className='w-auto' to={'/Profile'}>
+                    <Link className='w-auto' to={(email !== '' && password !== '' && passwordV && emailV && username !=='' && usernameV && name !=='' && nameV) ? '/Profile' : ''}>
                         <div className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center font-imprima mt-10' onClick={()=>setConfirm(true)}>Create Account</div>
                     </Link>
                     <div className='flex justify-between items-center mt-4 mx-4'>
