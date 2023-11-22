@@ -92,8 +92,12 @@ function Profile(){
                     </Link>
                 </div>
                 <div className='w-auto flex justify-between mx-11'>
-                    <div className='w-auto font-imprima text-gray-400 text-lg'>Skip</div>
-                    <div className='w-auto border-2 border-myOrange text-center font-imprima text-myOrange py-1 px-2 rounded-xl' onClick={()=>setConfirm(true)}>Done</div>
+                    <Link className='w-auto' to={'/Map'}>
+                        <div className='w-auto font-imprima text-gray-400 text-lg'>Skip</div>
+                    </Link>
+                    <Link className='w-auto' to={(Name && Username && nameV && usernameV) ? '/Map' : ''}>
+                        <div className='w-auto border-2 border-myOrange text-center font-imprima text-myOrange py-1 px-2 rounded-xl' onClick={()=>setConfirm(true)}>Done</div>
+                    </Link>
                 </div>
             </div>
         </div>

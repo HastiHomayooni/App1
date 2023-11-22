@@ -5,6 +5,7 @@ import SignUp from '../src/SignUp';
 import Login from '../src/Login';
 import Profile from '../src/Profile';
 import Specification from '../src/Specification';
+import Map from '../src/Map';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='Login' element={<Login/>}/>
           <Route path='Profile' element={<Profile/>}/>
           <Route path='Specification' element={<Specification/>}/>
+          <Route path='Map' element={<Map/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
