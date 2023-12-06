@@ -96,7 +96,7 @@ function Profile(){
                         <div className='w-auto font-imprima text-gray-400 text-lg'>Skip</div>
                     </Link>
                     <Link className='w-auto' to={(Name && Username && nameV && usernameV) ? '/Map' : ''}>
-                        <div className='w-auto border-2 border-myOrange text-center font-imprima text-myOrange py-1 px-2 rounded-xl' onClick={()=>setConfirm(true)}>Done</div>
+                        <div className='w-auto border-2 border-myOrange text-center font-imprima text-myOrange py-1 px-2 rounded-xl hover:bg-myOrange hover:text-white' onClick={()=>setConfirm(true)}>Done</div>
                     </Link>
                 </div>
             </div>
