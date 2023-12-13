@@ -98,13 +98,16 @@ function Map(){
     return(
         <>
             <div className='w-screen h-screen flex flex-col items-center'>
-                <div className='absolute w-11/12 mx-auto flex justify-between bg-white m-4 p-1 z-10 rounded-2xl'>
-                    <Link to={''}>
-                        <img className='w-10 py-1' src={back} alt="back" />
-                    </Link>
+                <div className='w-11/12 xl:w-9/12 flex'>
+                    <div className='absolute w-auto mr-auto bg-white my-4 p-1 z-10 rounded-2xl'>
+                        <Link to={''}>
+                            <img className='w-10 py-1' src={back} alt="back" />
+                        </Link>
+                    </div>
                 </div>
-                <div className='rounded-t-3xl py-4 px-5 h-auto w-11/12 xl:w-9/12 mx-auto bg-white flex flex-col items-center justify-center absolute bottom-0 z-10'>
+                <div className='rounded-t-3xl py-4 sm:px-5 h-auto w-11/12 xl:w-9/12 mx-auto bg-white flex flex-col items-center justify-center absolute bottom-0 z-10'>
                     <div className='w-3/4 flex flex-col items-center justify-center'>
+                        <div className='w-auto font-imprima text-center text-myDark mt-3 mb-5 sm:text-xl'>please choose your location</div>
                         <div className='w-full flex p-1 pl-2 items-center justify-between bg-myOrange rounded-xl'>
                             <img className='w-12' src={search} alt="search"/>
                             <input className='w-4/5 px-4 py-3 rounded-xl outline-none text-xl text-center font-imprima text-black' onChange={handleChange} placeholder='Your Location' value={address}/>
@@ -133,9 +136,14 @@ function Map(){
                                 </Swiper>
                             </div>
                         )}
-                        <Link className='w-3/5 mt-10 mx-auto' to={''}>
-                            <div className='w-auto bg-gray-200 text-center font-imprima text-myDark p-2 rounded-xl hover:bg-myDark hover:text-gray-200'>Done</div>
-                        </Link>
+                        <div className='w-full mt-8 flex justify-between mx-11'>
+                            <Link className='w-auto' to={'/Map'}>
+                                <div className='w-auto font-imprima text-gray-400 text-lg'>Skip</div>
+                            </Link>
+                            <Link className='w-auto ml-auto' to={'/Account'}>
+                                <div className='w-auto bg-myDark text-center text-white font-imprima  p-2 rounded-xl hover:brightness-150'>Done</div>
+                            </Link>
+                        </div>
                     </div>
 
                 </div>
