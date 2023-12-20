@@ -98,55 +98,48 @@ function Map(){
     return(
         <>
             <div className='w-screen h-screen flex flex-col items-center'>
-                <div className='w-11/12 xl:w-9/12 flex'>
-                    <div className='absolute w-auto mr-auto bg-white my-4 p-1 z-10 rounded-2xl'>
+                <div className='w-11/12 xl:w-9/12 my-4 flex item-center'>
+                    <div className='flex items-center justify-center w-auto mr-auto bg-white p-1 py-3 h-min z-10 rounded-xl'>
                         <Link to={''}>
-                            <img className='w-10 py-1' src={back} alt="back" />
+                            <img className='w-4/5 m-auto' src={back} alt="back" />
                         </Link>
                     </div>
-                </div>
-                <div className='rounded-t-3xl py-4 sm:px-5 h-auto w-11/12 xl:w-9/12 mx-auto bg-white flex flex-col items-center justify-center absolute bottom-0 z-10'>
-                    <div className='w-3/4 flex flex-col items-center justify-center'>
-                        <div className='w-auto font-imprima text-center text-myDark mt-3 mb-5 sm:text-xl'>please choose your location</div>
-                        <div className='w-full flex p-1 pl-2 items-center justify-between bg-myOrange rounded-xl'>
-                            <img className='w-12' src={search} alt="search"/>
-                            <input className='w-4/5 px-4 py-3 rounded-xl outline-none text-xl text-center font-imprima text-black' onChange={handleChange} placeholder='Your Location' value={address}/>
+                    <div className='w-10/12 flex flex-col items-center'>
+                        <div className='w-full flex p-1 items-center justify-between z-10 bg-myOrange rounded-xl'>
+                            <img className='w-10' src={search} alt="search"/>
+                            <input className='w-4/5 px-2 py-3 rounded-xl outline-none text-xl text-right font-imprima text-black' onChange={handleChange} placeholder='Your Location' value={address}/>
                         </div>
-                        {bool && address && addresses.length > 0 && (
-                            <div className='w-full px-4 overflow-hidden border-x-2 border-b-2 border-gray-200 rounded-b-xl h-auto max-h-20 mx-8 mb-7 flex flex-col justify-between items-end'>
-                                <Swiper
-                                    direction={'vertical'}
-                                    slidesPerView={'auto'}
-                                    freeMode={true}
-                                    scrollbar={true}
-                                    mousewheel={true}
-                                    modules={[FreeMode, Scrollbar, Mousewheel]}
-                                    className="mySwiper"
-                                >
-                                    <SwiperSlide>
-                                        {addresses.map((address) => (
-                                            <>
-                                                <div className='w-full text-lg my-2 font-imprima text-right cursor-pointer' 
-                                                    onClick={() =>{ setAddress(address.title);
-                                                        setBool(false);
-                                                        setUserLocation([address.location.y, address.location.x]);}} key={address.id}>{address.title}</div>
-                                            </>
-                                        ))}
-                                    </SwiperSlide>
-                                </Swiper>
-                            </div>
-                        )}
-                        <div className='w-full mt-8 flex justify-between mx-11'>
-                            <Link className='w-auto' to={'/Map'}>
-                                <div className='w-auto font-imprima text-gray-400 text-lg'>Skip</div>
-                            </Link>
-                            <Link className='w-auto ml-auto' to={'/Account'}>
-                                <div className='w-auto bg-myDark text-center text-white font-imprima  p-2 rounded-xl hover:brightness-150'>Done</div>
-                            </Link>
+                        <div className='w-full z-10'>
+                            {bool && address && addresses.length > 0 && (
+                                <div className='w-full bg-white px-2 z-10 overflow-hidden shadow-slate-300 shadow-sm border-x-2 border-b-2 border-gray-200 rounded-b-xl h-auto max-h-40 mb-7 flex flex-col justify-between items-end'>
+                                    <Swiper
+                                        direction={'vertical'}
+                                        slidesPerView={'auto'}
+                                        freeMode={true}
+                                        scrollbar={true}
+                                        mousewheel={true}
+                                        modules={[FreeMode, Scrollbar, Mousewheel]}
+                                        className="mySwiper"
+                                    >
+                                        <SwiperSlide>
+                                            {addresses.map((address) => (
+                                                <>
+                                                    <div className='w-full text-lg my-2 font-imprima text-right cursor-pointer' 
+                                                        onClick={() =>{ setAddress(address.title);
+                                                            setBool(false);
+                                                            setUserLocation([address.location.y, address.location.x]);}} key={address.id}>{address.title}</div>
+                                                </>
+                                            ))}
+                                        </SwiperSlide>
+                                    </Swiper>
+                                </div>
+                            )}
                         </div>
                     </div>
-
                 </div>
+                <Link className='w-5/12 sm:w-3/12 mx-auto z-10 mt-auto mb-5' to={'/Account'}>
+                    <div className='rounded-3xl py-4  w-full bg-myDark hover:brightness-150 text-center text-lg text-white font-imprima'>Done</div>
+                </Link>
             </div>
             <MapContainer center={userLocation} zoom={14.5}
                 style={{ height: "100%", width: "100%", position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}>

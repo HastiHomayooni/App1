@@ -28,11 +28,11 @@ function Specification (){
                     <input value={hobbies} onChange={(event)=> setHobbies(event.target.value)} className='w-8/12 border border-slate-300 py-2 px-4 mx-2 rounded-2xl outline-none bg-transparent text-white font-imprima focus:bg-white focus:text-myDark hover:bg-white hover:text-myDark' placeholder='...'/>
                 </div>
                 <div className='w-full mb-6 flex justify-center rounded-2xl'>
-                    <label className='text-white font-imprima text-left flex items-center'>education : </label>
+                    <label className='text-white font-imprima text-left flex items-center'>Education : </label>
                     <input value={education} onChange={(event)=> setEducation(event.target.value)} className='w-8/12 border border-slate-300 py-2 px-4 mx-2 rounded-2xl outline-none bg-transparent text-white font-imprima focus:bg-white focus:text-myDark hover:bg-white hover:text-myDark' placeholder='...'/>
                 </div>
                 <div className='w-full mb-4 flex justify-center rounded-2xl'>
-                    <label className='text-white font-imprima text-left flex items-center mr-11'>job : </label>
+                    <label className='text-white font-imprima text-left flex items-center mr-11'>Job : </label>
                     <input value={job} onChange={(event)=> setJob(event.target.value)} className='w-8/12 border border-slate-300 py-2 px-4 mx-2 rounded-2xl outline-none bg-transparent text-white font-imprima focus:bg-white focus:text-myDark hover:bg-white hover:text-myDark' placeholder='...'/>
                 </div>
                 {(job==='' || education==='' || hobbies==='' || favorites==='') && (<div className='w-auto text-myOrange font-imprima text-left text-xs pr-10'>Please fill these boxes to help find friends with similar personality</div>)}
