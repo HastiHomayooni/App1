@@ -78,7 +78,7 @@ function Profile(){
                     </div>
                     <div className='w-auto flex justify-between my-5 px-2 py-1'>
                         <div className='w-auto font-imprima text-gray-400'>Gender</div>
-                        <select value={Gender} onChange={(event)=> setGender(event.target.value)} className='w-44 sm:w-64 outline-none border-b pl-3 border-gray-200 text-myDark font-imprima' style={{borderBottomWidth: '1.5px'}}>
+                        <select value={Gender} onChange={(event)=> setGender(event.target.value)} className='w-44 bg-white sm:w-64 outline-none border-b pl-3 border-gray-200 text-myDark font-imprima' style={{borderBottomWidth: '1.5px'}}>
                             <option value='female'>Female</option>
                             <option value='male'>Male</option>
                             <option value='others'>Others</option>
