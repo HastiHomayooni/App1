@@ -16,7 +16,7 @@
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "swiper": "^11.0.5",
+    "swiper": "^9.4.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -57,14 +57,15 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy",
-      "\\.(png|jpg|jpeg|gif|svg)$": "<rootDir>/__mocks__/fileMock.js"
+      "\\.(png|jpg|jpeg|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "swiper/css": "swiper/swiper.min.css"
     },
     "transform": {
       "^.+\\.[jt]sx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!(axios)/)"
-    ]
-  },
-  "testEnvironment": "jsdom"
+    ],
+    "testEnvironment": "jsdom"
+  }
 }
+
