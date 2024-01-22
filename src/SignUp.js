@@ -2,9 +2,11 @@ import React from 'react';
 import './App.css';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import axios from 'axios';
 
-function SignUp(){
+function SignUp({setUser}){
     const [confirm,setConfirm] = useState(false);
+    const [create,setCreate] = useState(false)
 
     const [name,setName] = useState('');
     const [username,setUsername] = useState('');
@@ -61,6 +63,40 @@ function SignUp(){
         }
         setPassword(value);
     }
+
+    const Signup = async () => {
+        if(name !==''&& nameV && username !=='' && usernameV && email !=='' && emailV && password !=='' && passwordV){
+            setConfirm(true)
+            try {
+                axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+                const response = await axios.post(
+                    'http://localhost:5000/UserManagement',
+                    {
+                        User: {
+                            username: username,
+                            password: password,
+                            email: email,
+                            name: name
+                        }
+                    }
+                );
+                const status = response.status;
+                const data = response.data
+                console.log(data)
+                console.log(status)
+                if(status === 200){
+                    setUser(data)
+                    setCreate(true)
+                }
+            } catch (error) {
+                alert("This username/email is already used")
+                console.error('Error fetching address:', error);
+            }
+        }else{
+            setConfirm(true)
+        }
+      };
     return(
         <div className='w-screen h-screen bg-gray-100 flex items-center justify-center sm:p-4'>
             <div className='w-screen h-screen sm:w-auto sm:h-auto bg-white flex flex-col items-center justify-center sm:rounded-3xl p-4 sm:px-20 sm:py-10'>
@@ -98,8 +134,8 @@ function SignUp(){
                             {password !=='' && !passwordV && confirm && (<div className='w-auto font-imprima text-left text-red-500 mx-2 md:px-6 px-3 text-xs'>Invalid Password</div>)}
                         </div>
                     </div>
-                    <Link className='w-auto' to={(email !== '' && password !== '' && passwordV && emailV && username !=='' && usernameV && name !=='' && nameV) ? '/Specification' : ''}>
-                        <div className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center font-imprima mt-10' onClick={()=>setConfirm(true)}>Create Account</div>
+                    <Link className='w-auto' to={(email !== '' && password !== '' && passwordV && emailV && username !=='' && usernameV && name !=='' && nameV && create) ? '/Specification' : ''}>
+                        <div className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center font-imprima mt-10' onClick={Signup}>Create Account</div>
                     </Link>
                     <div className='flex justify-between items-center mt-4 mx-4'>
                         <div className='text-myDark w-auto text-sm mr-2 ml-auto'>Already have an account ?</div>
