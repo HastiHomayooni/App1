@@ -12,20 +12,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {useState} from 'react';
 
 function App() {
-  const [OtherLocation,setOtherLocation] =useState([[36.58, 53.06],[36.556, 53.06],])
+  const [OtherLocation,setOtherLocation] =useState([])
   const [posts,setPosts] =useState([])
+  const [user,setUser] =useState(null)
+  const [userArray,setUserArray] =useState(null)
+  
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/'>
           <Route index element={<Start/>}/>
-          <Route path='SignUp' element={<SignUp/>}/>
-          <Route path='Login' element={<Login/>}/>
-          <Route path='Profile' element={<Profile/>}/>
-          <Route path='Specification' element={<Specification/>}/>
-          <Route path='Map' element={<Map OtherLocation={OtherLocation}/>}/>
-          <Route path='Account' element={<Account/>}/>
-          <Route path='FriendProfile' element={<FriendProfile posts={posts}/>}/>
+          <Route path='SignUp' element={<SignUp setUser={setUser}/>}/>
+          <Route path='Login' element={<Login setUser={setUser}/>}/>
+          <Route path='Profile' element={<Profile user={user} setUser={setUser}/>}/>
+          <Route path='Specification' element={<Specification user={user} setUser={setUser}/>}/>
+          <Route path='Map' element={<Map user={user} setUser={setUser} setUserArray={setUserArray} OtherLocation={OtherLocation} setOtherLocation={setOtherLocation} />}/>
+          <Route path='Account' element={<Account user={user}/>}/>
+          <Route path='FriendProfile' element={<FriendProfile userArray={userArray} posts={posts}/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
