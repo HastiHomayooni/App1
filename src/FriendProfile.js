@@ -19,24 +19,32 @@ import botUser from './images/bot_user.png';
 import chatroom from './images/chatroom.png';
 import { Link } from 'react-router-dom';
 
-function FriendProfile({posts}){
-    const [Name,setName]=useState('Name')
-    const [Username,setUsername]=useState('Username')
-    const [Date, setDate] = useState('mm/dd/yyyy');
-    const [Gender, setGender] = useState('Gender');
-    const [Location, setLocation] = useState('Location');
-    const [Favorite, setFavorite] = useState('');
-    const [Hobbies, setHobbies] = useState('');
-    const [Education, setEducation] = useState('');
-    const [Job, setJob] = useState('');
-    const [prof, setProf] = useState(true);
+function FriendProfile({posts,userArray}){
+    const Name=userArray.user.name
+    const Username=userArray.user.username
+    const Date=userArray.user.date
+    const Gender=userArray.user.gender
 
+    let Location
+    console.log(userArray.locations)
+    if(userArray.locations !=null){
+        Location=userArray.locations.loc_description
+    }else{
+        Location='location'
+    }
+    const Favorite=userArray.user.favorites
+    const Hobbies=userArray.user.hobbies
+    const Education=userArray.user.education
+    const Job=userArray.user.job
+
+    const [prof, setProf] = useState(true);
     const [swiper, setSwiper] = useState(null);
+    const [follow, setFollow] = useState("Follow")
 
     const onSwiperUpdate = () => {
     swiper && swiper.update(); // Update the Swiper instance when the number of slides changes
     };
-
+    console.log(userArray)
     return(
         <div className='w-screen h-screen bg-gray-200 overflow-y-scroll flex items-center justify-center'>
             <div className='w-screen h-screen relative sm:w-auto flex items-center flex-col'>
@@ -56,15 +64,15 @@ function FriendProfile({posts}){
                         <div className='w-auto flex flex-col mb-12 -mt-14 ml-16'>
                             <div className='w-auto text-myOrange font-imprima text-3xl'>{Name}</div>
                             <div className='w-auto flex mt-3'>
-                                <img src={loc} alt='location' className='w-1/6 mr-3 py-1'/>
+                                <img src={loc} alt='location' className='w-5 mr-3 py-1'/>
                                 <div className='w-auto text-white text-xl font-imprima'>{Location}</div>
                             </div>
                             <div className='w-auto flex mt-1'>
-                                <img src={gender} alt='gender' className='w-2/6 mr-3 -ml-2'/>
+                                <img src={gender} alt='gender' className='w-9 mr-3 -ml-2'/>
                                 <div className='w-auto text-white text-xl font-imprima'>{Gender}</div>
                             </div>
                             <div className='w-auto flex mt-1'>
-                                <img src={calender} alt='date' className='w-1/6 mr-3 py-1 ml-1'/>
+                                <img src={calender} alt='date' className='w-5 mr-3 py-1 ml-1'/>
                                 <div className='w-auto text-white text-xl font-imprima'>{Date}</div>
                             </div>
                         </div>
@@ -113,7 +121,10 @@ function FriendProfile({posts}){
                         )}
                         {prof &&(<div className='w-full flex px-10 justify-between items-center'>
                             <Link className='w-auto' to={''}>
-                                <button className='w-auto bg-white rounded-2xl font-bold px-8 text-lg py-2 font-imprima text-myOrange'>Fallow</button>
+                                <button className='w-auto bg-white rounded-2xl font-bold px-8 text-lg py-2 font-imprima text-myOrange' onClick={()=>{if(follow == "Follow"){
+                                                                                                                                                setFollow("Following")}else{
+                                                                                                                                                    setFollow("Follow")
+                                                                                                                                                }}}>{follow}</button>
                             </Link>
                             <Link className='w-auto' to={''}>
                                 <button className='w-auto bg-white rounded-2xl px-6 text-lg py-2 font-imprima text-myDark'>Message</button>

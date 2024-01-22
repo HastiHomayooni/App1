@@ -6,14 +6,27 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import camera from './images/camera.png';
 import next from './images/next.png';
+import axios from 'axios';
 
-function Profile(){
-    const [Name,setName]=useState('Name')
-    const [Username,setUsername]=useState('Username')
-    const [Date, setDate] = useState('');
-    const [Gender, setGender] = useState('Female');
+function Profile({user,setUser}){
+    const favorites=user.user.favorites
+    console.log(favorites)
+    console.log(user)
+    const hobbies=user.user.hobbies
+    const education=user.user.education
+    const job=user.user.job
+    const email=user.user.email
+    const password=user.user.password
+    const user_id=user.user.user_id
+
+    const [Name,setName]=useState(user.user.name)
+    const [Username,setUsername]=useState(user.user.username)
+
+    const [Date, setDate] = useState(user.user.date);
+    const [Gender, setGender] = useState(user.user.gender);
     const [Camera,setCamera]=useState(camera);
     const [confirm,setConfirm] = useState(false);
+    // const [change,setChange] = useState(false)
 
     const [nameV,setNameV] = useState(true);
     const [usernameV,setUsernameV] = useState(true);
@@ -42,8 +55,52 @@ function Profile(){
 
     function handleChange(e) {
         console.log(e.target.files);
+        console.log(URL.createObjectURL(e.target.files[0]));
         setCamera(URL.createObjectURL(e.target.files[0]));
     }
+
+    const done = async () => {
+        console.log("speee")
+        if(Name !==''&& nameV && Username !=='' && usernameV){
+            setConfirm(true)
+            try {
+                console.log("oomad")
+                console.log(Date)
+                console.log(Gender)
+                axios.defaults.headers.put['Content-Type'] = 'application/json';
+                const response = await axios.put(
+                    'http://localhost:5000/UserManagement',
+                    {
+                        User: {
+                            user_id: user_id,
+                            username: Username,
+                            password: password,
+                            email: email,
+                            name: Name,
+                            favorites: favorites,
+                            hobbies: hobbies,
+                            education: education,
+                            job: job,
+                            Date: Date,
+                            gender: Gender
+                        }
+                    }
+                );
+                const status = response.status;
+                const data = response.data
+                console.log(data)
+                console.log(status)
+                if(status === 200){
+                    setUser(data)
+                }
+            } catch (error) {
+                alert("This username is already used")
+                console.error('Error fetching address:', error);
+            }
+        }else{
+            setConfirm(true)
+        }
+      };
     return(
         <div className='w-screen h-screen bg-gray-200 flex items-center justify-center'>
             <div className='w-screen h-screen sm:w-max sm:px-12 sm:mx-auto bg-white flex-col items-center justify-center'>
@@ -92,11 +149,11 @@ function Profile(){
                     </Link>
                 </div>
                 <div className='w-auto flex justify-between mx-11'>
-                    <Link className='w-auto' to={'/Map'}>
-                        <div className='w-auto font-imprima text-gray-400 text-lg'>Skip</div>
+                    <Link className='w-auto' to={'/Login'}>
+                        <div className='w-auto font-imprima text-gray-400 text-lg'>Logout</div>
                     </Link>
                     <Link className='w-auto' to={(Name && Username && nameV && usernameV) ? '/Map' : ''}>
-                        <div className='w-auto border-2 border-myOrange text-center font-imprima text-myOrange py-1 px-2 rounded-xl hover:bg-myOrange hover:text-white' onClick={()=>setConfirm(true)}>Done</div>
+                        <div className='w-auto border-2 border-myOrange text-center font-imprima text-myOrange py-1 px-2 rounded-xl hover:bg-myOrange hover:text-white' onClick={done}>Done</div>
                     </Link>
                 </div>
             </div>

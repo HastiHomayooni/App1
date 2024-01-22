@@ -19,16 +19,23 @@ import botUser from './images/bot_user.png';
 import chatroom from './images/chatroom.png';
 import { Link } from 'react-router-dom';
 
-function Account(){
-    const [Name,setName]=useState('Name')
-    const [Username,setUsername]=useState('Username')
-    const [Date, setDate] = useState('mm/dd/yyyy');
-    const [Gender, setGender] = useState('Gender');
-    const [Location, setLocation] = useState('Location');
-    const [Favorite, setFavorite] = useState('');
-    const [Hobbies, setHobbies] = useState('');
-    const [Education, setEducation] = useState('');
-    const [Job, setJob] = useState('');
+function Account({user}){
+    console.log(user)
+    const Name=user.user.name
+    const Username=user.user.username
+    const Date=user.user.date
+    const Gender=user.user.gender
+    let Location
+    console.log(user.locations)
+    if(user.locations !=null){
+        Location=user.locations.loc_description
+    }else{
+        Location='location'
+    }
+    const Favorite=user.user.favorites
+    const Hobbies=user.user.hobbies
+    const Education=user.user.education
+    const Job=user.user.job
     const [prof, setProf] = useState(true);
     const [posts, setPosts] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null);
@@ -66,16 +73,16 @@ function Account(){
                         <div className='w-auto flex flex-col mb-12 -mt-14 ml-16'>
                             <div className='w-auto text-myOrange font-imprima text-3xl'>{Name}</div>
                             <div className='w-auto flex mt-3'>
-                                <img src={loc} alt='location' className='w-1/6 mr-3 py-1'/>
+                                <img src={loc} alt='location' className='w-5 mr-3 py-1'/>
                                 <div className='w-auto text-white text-xl font-imprima'>{Location}</div>
                             </div>
                             <div className='w-auto flex mt-1'>
-                                <img src={gender} alt='gender' className='w-2/6 mr-3 -ml-2'/>
+                                <img src={gender} alt='gender' className='w-9 mr-3 -ml-2'/>
                                 <div className='w-auto text-white text-xl font-imprima'>{Gender}</div>
                             </div>
                             <div className='w-auto flex mt-1'>
-                                <img src={calender} alt='date' className='w-1/6 mr-3 py-1 ml-1'/>
-                                <div className='w-auto text-white text-xl font-imprima'>{Date}</div>
+                                <img src={calender} alt='date' className='w-5 mr-3 py-1 ml-1'/>
+                                <div className='w-auto text-white text-sm font-imprima'>{Date}</div>
                             </div>
                         </div>
                         <div className='w-full mb-8 flex px-20 justify-between items-center'>
@@ -134,7 +141,7 @@ function Account(){
                             <Link className='w-auto' to={''}>
                                 <button className='w-auto bg-white rounded-2xl font-bold px-8 text-lg py-2 font-imprima text-myOrange'>Friends</button>
                             </Link>
-                            <Link className='w-auto' to={''}>
+                            <Link className='w-auto' to={'/Profile'}>
                                 <button className='w-auto bg-white rounded-2xl px-6 text-lg py-2 font-imprima text-myDark'>Edit Profile</button>
                             </Link>
                         </div>)}
@@ -142,13 +149,13 @@ function Account(){
                     </div>
                 </div>
                 <div className='fixed py-3 px-7 sm:mx-auto flex justify-between items-center bottom-0 w-full bg-slate-100'>
-                    <Link className='w-auto' to={''}>
+                    <Link className='w-auto' to={'/Map'}>
                         <img src={botLoc} alt='location' className='w-4/5'/>
                     </Link>
                     <Link className='w-auto' to={''}>
                         <img src={botChat} alt='chat' className='w-4/5'/>
                     </Link>
-                    <Link className='w-auto' to={''}>
+                    <Link className='w-auto' to={'/Account'}>
                         <img src={botUser} alt='profile' className='w-4/5'/>
                     </Link>
                 </div>
