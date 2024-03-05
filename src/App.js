@@ -7,6 +7,7 @@ import Specification from '../src/Specification';
 import FriendProfile from '../src/FriendProfile';
 import Map from '../src/Map';
 import Account from '../src/Account'
+// import Admin from '../src/Admin'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import {useState} from 'react';
@@ -29,6 +30,7 @@ function App() {
           <Route path='Map' element={<Map user={user} setUser={setUser} setUserArray={setUserArray} OtherLocation={OtherLocation} setOtherLocation={setOtherLocation} />}/>
           <Route path='Account' element={<Account user={user}/>}/>
           <Route path='FriendProfile' element={<FriendProfile userArray={userArray} posts={posts}/>}/>
+          {/* <Route path='Admin' element={<Admin/>}/> */}
         </Route>
       </Routes>
     </BrowserRouter>

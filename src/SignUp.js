@@ -3,8 +3,16 @@ import './App.css';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
+// import Phone from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import call from './images/call.png'
 
 function SignUp({setUser}){
+    const [boolNumber,setboolNumber] = useState(false);
+    const [Number,setNumber] = useState('');
+    const [code,setCode] = useState('');
+    const [codeSent,setCodeSent] = useState('');
+
     const [confirm,setConfirm] = useState(false);
     const [create,setCreate] = useState(false)
 
@@ -97,12 +105,35 @@ function SignUp({setUser}){
             setConfirm(true)
         }
       };
+
+    function sendCode(){
+        if (Number ===''){
+            alert('Please fill your phone number')
+        }else{
+            alert('We sent code to your phone number')
+            let cSent=100+Math.floor(Math.random() * 9999)
+            console.log(cSent)
+            setCodeSent(cSent)
+        }
+    }
+
+    function next(){
+        if(codeSent ===''){
+            alert('Please fill your phone number')
+        }else{
+            if(codeSent==code){
+                setboolNumber(true)
+            }else{
+                alert('code is incorrect')
+            }
+        }
+    }
     return(
         <div className='w-screen h-screen bg-gray-100 flex items-center justify-center sm:p-4'>
             <div className='w-screen h-screen sm:w-auto sm:h-auto bg-white flex flex-col items-center justify-center sm:rounded-3xl p-4 sm:px-20 sm:py-10'>
                 <div className='w-auto font-imprima text-myDark text-3xl text-center'><b>Sign up Account</b></div>
                 <div className='w-auto text-center font-imprima text-sm text-gray-500 mt-3'>please fill the details and create account</div>
-                <div className='flex flex-col my-5 w-auto'>
+                {boolNumber &&(<div className='flex flex-col my-5 w-auto'>
                     <div className='flex flex-col w-auto my-2 md:flex-row'>
                         <div className='flex flex-col w-auto'>
                             <input className='border-2 placeholder:font-imprima placeholder:text-center text-center bg-gray-100 border-gray-100 w-auto mx-2 my-2 md:px-6 md:py-3 px-3 py-2 rounded-3xl focus:border-myDark focus:outline-none'
@@ -143,7 +174,18 @@ function SignUp({setUser}){
                             <div className='text-myOrange ml-2 text-sm mr-auto'><b>Log in</b></div>
                         </Link>
                     </div>
-                </div>
+                </div>)}
+                {!boolNumber &&(<div className='flex flex-col items-center my-5 w-auto'>
+                    <div className='w-full flex'>
+                        <img className='w-6 py-6' src={call} alt='phone number'/>
+                        <input className='border-2 placeholder:font-imprima placeholder:text-center text-center bg-gray-100 border-gray-100 w-auto mx-2 my-2 md:px-6 md:py-3 px-3 py-2 rounded-3xl focus:border-myDark focus:outline-none'
+                            value={Number} onChange={e => setNumber(e.target.value)}  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type='text' placeholder='09**-***-****'/>
+                    </div>
+                    <input className='border-2 placeholder:font-imprima placeholder:text-center text-center bg-transparent border-gray-100 w-auto mx-2 my-2 md:px-6 md:py-3 px-3 py-2 rounded-3xl focus:border-myDark focus:outline-none'
+                            value={code} onChange={e => setCode(e.target.value)}  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type='text' placeholder='code sent'/>
+                    <button className='bg-transparent border-myDark border-2 rounded-3xl mx-2 py-3 px-8 w-auto text-myDark text-center font-imprima mt-5' onClick={sendCode}>Send verification code</button>
+                    <button className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center font-imprima mt-10' onClick={next}>Confirm</button>
+                </div>)}
             </div>
         </div>
     )

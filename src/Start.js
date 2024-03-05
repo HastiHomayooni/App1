@@ -18,6 +18,9 @@ function Start(){
                     <div className='text-white ml-2 text-sm'><b>Log in</b></div>
                 </Link>
             </div>
+            {/* <Link className='w-auto' to={'/Admin'}>
+                    <div className='text-white ml-2 text-2xl border-2 border-white p-1'>Admin Panel</div>
+            </Link> */}
         </div>
     );
 }
