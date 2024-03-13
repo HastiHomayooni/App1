@@ -113,11 +113,11 @@ function Account({user}){
                                     <Swiper navigation={true} modules={[Navigation]} onSwiper={(swiper) => setSwiper(swiper)} onSlideChange={onSwiperUpdate} className="mySwiper">
                                         <SwiperSlide>
                                             <div className='w-full flex flex-col items-center justify-center'>   
-                                            <label htmlFor="upload-input">
-                                                <div className='w-auto mt-20 h-full py-1 rounded-full border-2 border-myOrange text-center text-myOrange text-3xl' >+</div>
-                                                <div className='w-auto text-gray-400 font-imprima font-bold'>Add Post</div>
-                                            </label>
-                                            <input id="upload-input" type="file" onChange={handleChange} className="hidden" />
+                                                <label htmlFor="upload-input">
+                                                    <div className='w-auto mt-20 h-full py-1 rounded-full border-2 border-myOrange text-center text-myOrange text-3xl' >+</div>
+                                                    <div className='w-auto text-gray-400 font-imprima font-bold'>Add Post</div>
+                                                </label>
+                                                <input id="upload-input" type="file" onChange={handleChange} className="hidden" />
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>

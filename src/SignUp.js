@@ -12,6 +12,7 @@ function SignUp({setUser}){
     const [Number,setNumber] = useState('');
     const [code,setCode] = useState('');
     const [codeSent,setCodeSent] = useState('');
+    const [boolsend,setboolSend] = useState(false);
 
     const [confirm,setConfirm] = useState(false);
     const [create,setCreate] = useState(false)
@@ -106,27 +107,60 @@ function SignUp({setUser}){
         }
       };
 
-    function sendCode(){
+    const sendCode = async ()=>{
         if (Number ===''){
             alert('Please fill your phone number')
         }else{
-            alert('We sent code to your phone number')
-            let cSent=100+Math.floor(Math.random() * 9999)
-            console.log(cSent)
-            setCodeSent(cSent)
+            try {
+                axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+                const response = await axios.post(
+                    'http://localhost:5000/phoneAuth',
+                    {
+                        phone_number: Number
+                    }
+                );
+                const status = response.status;
+                const data = response.data
+                console.log(data)
+                console.log(status)
+                alert('We sent code to your phone number')
+                setboolSend(true)
+            } catch (error) {
+                console.error('Error fetching address:', error);
+            }
         }
     }
 
-    function next(){
-        if(codeSent ===''){
-            alert('Please fill your phone number')
-        }else{
-            if(codeSent==code){
-                setboolNumber(true)
-            }else{
-                alert('code is incorrect')
-            }
+    const next = async () => {
+        try {
+            axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+            const response = await axios.put(
+                'http://localhost:5000/phoneAuth',
+                {
+                    phone_number: Number,
+                    pass: code
+                }
+            );
+            const status = response.status;
+            const data = response.data
+            console.log(data)
+            console.log(status)
+            setboolNumber(true)
+        } catch (error) {
+            alert("wrong code")
+            console.error('Error fetching address:', error);
         }
+        // if(codeSent ===''){
+        //     alert('Please fill your phone number')
+        // }else{
+        //     if(codeSent==code){
+        //         setboolNumber(true)
+        //     }else{
+        //         alert('code is incorrect')
+        //     }
+        // }
     }
     return(
         <div className='w-screen h-screen bg-gray-100 flex items-center justify-center sm:p-4'>
@@ -183,8 +217,9 @@ function SignUp({setUser}){
                     </div>
                     <input className='border-2 placeholder:font-imprima placeholder:text-center text-center bg-transparent border-gray-100 w-auto mx-2 my-2 md:px-6 md:py-3 px-3 py-2 rounded-3xl focus:border-myDark focus:outline-none'
                             value={code} onChange={e => setCode(e.target.value)}  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type='text' placeholder='code sent'/>
-                    <button className='bg-transparent border-myDark border-2 rounded-3xl mx-2 py-3 px-8 w-auto text-myDark text-center font-imprima mt-5' onClick={sendCode}>Send verification code</button>
-                    <button className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center font-imprima mt-10' onClick={next}>Confirm</button>
+                    {!boolsend &&(<button className='bg-myOrange rounded-3xl mx-2 py-3 px-8 w-auto text-white text-center font-imprima mt-5' onClick={sendCode}>Send verification code</button>)}
+                    {boolsend &&(<button className='mx-2 border-b-2 border-myDark w-auto text-myDark text-center font-imprima mt-3' onClick={sendCode}>Send verification code</button>)}
+                    {boolsend &&(<button className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center font-imprima mt-10' onClick={next}>Confirm</button>)}
                 </div>)}
             </div>
         </div>
