@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Hobby from '../src/images/Hobby.jpg'
 // import back from '../src/images/back.png'
@@ -7,31 +7,34 @@ import { useState } from 'react';
 import axios from 'axios';
 
 function Specification ({user,setUser}){
-    const [favorites,setFavorites] =useState(user.user.favorites)
-    const [hobbies,setHobbies] =useState(user.user.hobbies)
-    const [education,setEducation] =useState(user.user.education)
-    const [job,setJob] =useState(user.user.job)
+    const [favorites,setFavorites] =useState()
+    const [hobbies,setHobbies] =useState()
+    const [education,setEducation] =useState()
+    const [job,setJob] =useState()
 
-    // if(user.user.favorites !=null){
-    //     setFavorites(user.user.favorites)
-    // }
-    // if(user.user.hobbies !=null){
-    //     setHobbies(user.user.hobbies)
-    // }
-    // if(user.user.education !=null){
-    //     setEducation(user.user.education)
-    // }
-    // if(user.user.job !=null){
-    //     setJob(user.user.job)
-    // }
+    const [name,setName] =useState()
+    const [username,setUsername] =useState()
+    const [email,setEmail] =useState()
+    const [password,setPassword] =useState()
+    const [user_id,setUser_id] =useState()
 
-    const name=user.user.name
-    const username=user.user.username
-    const email=user.user.email
-    const password=user.user.password
-    const user_id=user.user.user_id
-    // console.log(user)
+    useEffect(()=>{
+        if(user){
+            console.log(user)
+            setFavorites(user.user.favorites)
+            setHobbies(user.user.hobbies)
+            setEducation(user.user.education)
+            setJob(user.user.job)
 
+            const name=user.user.name
+            const username=user.user.username
+            const email=user.user.email
+            const password=user.user.password
+            const user_id=user.user.user_id
+            console.log(user)
+        }
+    },[user])
+    
     const specification = async () => {
         console.log("speee")
         try {

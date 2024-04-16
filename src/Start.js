@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import friends from './images/friends.png';
 import { Link } from "react-router-dom";
 
 function Start(){
+    useEffect(()=>{
+        
+    },[])
     return (
         <div className="flex flex-col px-4 items-center justify-center bg-myOrange h-screen w-screen">
             <div className='text-white font-inspiration w-auto lg:text-8xl -mb-5 mt-2 text-7xl text-center '>Hi Buddy</div>

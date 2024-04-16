@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { useState } from 'react';
 import axios from 'axios';
 
 function Login({setUser}){
+    const navigate =useNavigate();
     const [confirm,setConfirm] = useState(false);
     const [create,setCreate] = useState(false)
 
@@ -40,25 +41,27 @@ function Login({setUser}){
     }
 
     const login = async () => {
-        if(email !=='' && emailV && password !=='' && passwordV){
+        if(email !== '' && password !== '' && passwordV && emailV){
             setConfirm(true)
             try {
                 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
                 const response = await axios.post(
-                    'http://localhost:5000/Logs',
+                    'http://localhost:5000/auth/Login',
                     {
-                        password: password,
+                        pass: password,
                         email: email
                     }
                 );
                 const status = response.status;
                 const data = response.data
+                const token = data.token
                 console.log(data)
                 console.log(status)
                 if(status === 200){
                     setUser(data)
-                    setCreate(true)
+                    localStorage.setItem('jwtToken', token)
+                    navigate('/Account')
                 }
             } catch (error) {
                 alert("incorrect")
@@ -88,9 +91,7 @@ function Login({setUser}){
                         {password !=='' && !passwordV && confirm && (<div className='w-auto font-imprima text-left text-red-500 mx-2 md:px-6 px-3 text-xs'>Invalid Password</div>)}
                     </div>
                     
-                    <Link className='w-auto' to={(email !== '' && password !== '' && passwordV && emailV && create )? '/Account' : ''}>
-                        <div className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center text-lg font-imprima mt-8 cursor-pointer' onClick={login}>Log in</div>
-                    </Link>
+                    <div className='bg-myOrange rounded-3xl mx-2 py-4 px-8 w-auto text-white text-center text-lg font-imprima mt-8 cursor-pointer' onClick={login}>Log in</div>
 
                     <div className='flex justify-between items-center mt-8 mx-4'>
                         <div className='text-myDark w-auto text-sm mr-2 ml-auto'>Don't have an account ?</div>
